@@ -109,7 +109,7 @@
                         free to contact me for your quite.
                     </p>
                     <div class="flex mt-5">
-                        <a href="#contact"
+                        <a href="https://drive.google.com/file/d/1Tse_UT67JzyhumwYL5Uu1G2D_tbYdhS3/view?usp=sharing"
                             class="py-2 px-6 rounded shadow-2xl bg-teal-600 text-white hover:bg-orange-500 ease duration-200">My
                             Resume</a>
                     </div>
@@ -434,7 +434,7 @@
 
 
     <!-- ========================================== Testimonial ========================================== -->
-    <section class="testimonial-section my-5 py-5" id="testimonial">
+    <section class="testimonial-section my-8 py-8" id="testimonial">
         <div class="container mx-auto px-4">
             <h2 class="text-center text-4xl mb-1">Testi<span class="text-teal-400 font-semibold">m</span>onial</h2>
             <p class="text-center mb-4">They Said About Me</p>
@@ -504,10 +504,26 @@
 
 
     <!-- ========================================== Contact ========================================== -->
-    <section class="contact-section my-5 py-5" id="contact">
+    <section class="contact-section my-8 py-8" id="contact">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-semibold text-center">C<span class="text-slate-700">on</span>tact <span
                     class="text-4xl text-teal-400">Me</span> </h2>
+            <div class="shadow-xl rounded-xl w-full max-w-md mx-auto p-6">
+                <form id="contact-form">
+                    <input type="hidden" name="contact_number">
+                    <label>Name</label>
+                    <input type="text" name="from_name" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
+                    <label>Email</label>
+                    <input type="email" name="email_id" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
+                    <label>Subject</label>
+                    <input type="text" name="subject" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
+                    <label>Message</label>
+                    <textarea name="message" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border"></textarea>
+                    <input type="submit" value="Send"
+                        class="bg-teal-500 text-slate-50 py-2 px-6 rounded shadow cursor-pointer w-full uppercase"
+                        cols="30" rows="10">
+                </form>
+            </div>
         </div>
     </section>
     <!-- ====================================xxx=== Contact ===xxx==================================== -->
@@ -526,6 +542,35 @@
         </div>
     </footer>
     <!-- ====================================xxx=== Footer ===xxx==================================== -->
+
+
+
+
+
+    <!-- ======================= Email Js CDN ======================= -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+            (function () {
+                // https://dashboard.emailjs.com/admin/account
+                emailjs.init('yfHZOu7s0ciEj816K');
+            })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('contact-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('service_djblj7b', 'template_b2rkf8h', this)
+                    .then(function () {
+                        console.log('SUCCESS!');
+                    }, function (error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
 
 
 </body>
