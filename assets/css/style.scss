@@ -55,3 +55,28 @@
 }
 
 // ================================ Hero
+
+
+
+
+
+// ================================ Menu Section
+#menu {
+    nav.menu {
+        display: flex;
+        align-items: center;
+
+        a {
+            color: #FFFFFF;
+            text-transform: capitalize;
+            margin-left: 20px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: #DDDDDD;
+            }
+        }
+    }
+}
+
+// ================================ Menu Section
