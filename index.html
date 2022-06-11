@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Majed's Portfolio</title>
 
+
+    <!-- ================================ Toastify CDN ================================ -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <!-- ================================ Main Style Sheet ================================ -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
@@ -545,10 +549,13 @@
 
 
 
-
-
     <!-- ======================= Email Js CDN ======================= -->
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- ======================= Toastify CDN ======================= -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
     <script>
 
         const form = document.getElementById("contact-form");
@@ -559,80 +566,48 @@
             const name = e.target.name.value,
                 email = e.target.email.value,
                 subject = e.target.subject.value,
-                message = e.target.message.value;
-
-            // Email.send({
-            //     SecureToken: "86db6188-16f4-46ce-9546-5215a1da3b49",
-            //     To: email,
-            //     From: 'mdmajedhasan599@gmail.com',
-            //     Subject: subject,
-            //     Body: message
-            // }).then(
-            //     message => alert(message),
-            //     e.target.reset()
-            // );
+                message = e.target.message.value,
+                body = `Message Sender Name: ${name} <br> Message Sender Email: ${email} <br> Subject: ${subject} <br> Message: ${message}`;
 
             Email.send({
                 Host: "smtp.elasticemail.com",
                 Username: "mdmajedhasan599@gmail.com",
                 Password: "CF5F7961C54D18075B362F309C8EDD41B740",
-                To: 'mdmajedhasan599@gmail.com',
-                From: email,
-                Subject: subject,
-                Body: message
-            }).then(
-                message => alert(message),
-                e.target.reset()
+                To: 'mdmajedhasan01811@gmail.com',
+                From: "mdmajedhasan599@gmail.com",
+                Subject: `New Message From Freelancer Majed's Portfolio From: ${name}`,
+                Body: body
+            }).then(message => {
+
+                if (message === "OK") {
+                    toastify("Your message has been sent...", "#14b8a6")
+                    e.target.reset()
+                }
+                else {
+                    toastify("Your message can't sent, Something went wrong, please try again later.", "red")
+                }
+            }
             );
         }
 
 
 
-        /*
-            username === mdmajedhasan599@gmail.com
-            password ===  CF5F7961C54D18075B362F309C8EDD41B740
-            Server === smtp.elasticemail.com
-            Port === 2525
-
-            Secure Token ===  8840f43f-df67-46ac-a188-3cca58860345
-            or ===== bdf380a4-7dc3-4726-aafe-c47f131e9437
-            or ===== 86db6188-16f4-46ce-9546-5215a1da3b49
-        */
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-            (function () {
-                // https://dashboard.emailjs.com/admin/account
-                emailjs.init('yfHZOu7s0ciEj816K');
-            })();
-    </script>
-    <script type="text/javascript">
-        window.onload = function () {
-            document.getElementById('contact-form').addEventListener('submit', function (event) {
-                event.preventDefault();
-                // generate a five digit number for the contact_number variable
-                this.contact_number.value = Math.random() * 100000 | 0;
-                // these IDs from the previous steps
-                emailjs.sendForm('service_djblj7b', 'template_b2rkf8h', this)
-                    .then(function () {
-                        console.log('SUCCESS!');
-                    }, function (error) {
-                        console.log('FAILED...', error);
-                    });
-            });
+        function toastify(text, background) {
+            Toastify({
+                text: text,
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: background,
+                },
+                onClick: function () { } // Callback after click
+            }).showToast();
         }
-    </script> -->
+
+    </script>
 
 
 </body>
