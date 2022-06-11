@@ -512,9 +512,9 @@
                 <form id="contact-form">
                     <input type="hidden" name="contact_number">
                     <label>Name</label>
-                    <input type="text" name="from_name" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
+                    <input type="text" name="name" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
                     <label>Email</label>
-                    <input type="email" name="email_id" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
+                    <input type="email" name="email" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
                     <label>Subject</label>
                     <input type="text" name="subject" class="w-full shadow outline-none pl-2 text-sm mb-4 p-3 border">
                     <label>Message</label>
@@ -548,7 +548,69 @@
 
 
     <!-- ======================= Email Js CDN ======================= -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+
+        const form = document.getElementById("contact-form");
+
+        form.onsubmit = (e) => {
+            e.preventDefault()
+
+            const name = e.target.name.value,
+                email = e.target.email.value,
+                subject = e.target.subject.value,
+                message = e.target.message.value;
+
+            // Email.send({
+            //     SecureToken: "86db6188-16f4-46ce-9546-5215a1da3b49",
+            //     To: email,
+            //     From: 'mdmajedhasan599@gmail.com',
+            //     Subject: subject,
+            //     Body: message
+            // }).then(
+            //     message => alert(message),
+            //     e.target.reset()
+            // );
+
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "mdmajedhasan599@gmail.com",
+                Password: "CF5F7961C54D18075B362F309C8EDD41B740",
+                To: 'mdmajedhasan599@gmail.com',
+                From: email,
+                Subject: subject,
+                Body: message
+            }).then(
+                message => alert(message),
+                e.target.reset()
+            );
+        }
+
+
+
+        /*
+            username === mdmajedhasan599@gmail.com
+            password ===  CF5F7961C54D18075B362F309C8EDD41B740
+            Server === smtp.elasticemail.com
+            Port === 2525
+
+            Secure Token ===  8840f43f-df67-46ac-a188-3cca58860345
+            or ===== bdf380a4-7dc3-4726-aafe-c47f131e9437
+            or ===== 86db6188-16f4-46ce-9546-5215a1da3b49
+        */
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
             (function () {
                 // https://dashboard.emailjs.com/admin/account
@@ -570,7 +632,7 @@
                     });
             });
         }
-    </script>
+    </script> -->
 
 
 </body>
